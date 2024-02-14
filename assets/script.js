@@ -17,7 +17,7 @@ const x = setInterval(function() {
 
   //definire data iniziale e finale
   const today = new Date().getTime();
-  const countDownDate = new Date("Apr 28, 2024 9:30:00").getTime();
+  const countDownDate = new Date("Jan 1, 2800 9:30:00").getTime();
 
   console.log(today);
   console.log(countDownDate);
@@ -26,17 +26,16 @@ const x = setInterval(function() {
   console.log(countDown);
 
 
-  //rendere leggibile la data
-  const year = Math.floor(countDown / (68 * 30 * 60 * 60 * 24));
-  const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
+  // Calcolo del tempo rimanente in anni, mesi, settimane, giorni, ore, minuti e secondi
+  const years = Math.floor(countDown / (1000 * 60 * 60 * 24 * 365));
+  const months = Math.floor((countDown % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+  const weeks = Math.floor((countDown % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7));
+  const days = Math.floor((countDown % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
   const hours = Math.floor((countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const mins = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
   const secs = Math.floor((countDown % (1000 * 60)) / 1000);
 
-  console.log (year, days, hours, mins, secs);
-
-  //display sul DOM
-
-  document.getElementById("countdown").innerHTML = year + "y " + days + "d " + hours + "h "+ mins + "m " + secs + "s ";
+  // Aggiornamento del DOM
+  document.getElementById("countdown").innerHTML = years + "y " + months + "m " + weeks + "w " + days + "d " + hours + "h " + mins + "m " + secs + "s ";
 
 }, 1000);
